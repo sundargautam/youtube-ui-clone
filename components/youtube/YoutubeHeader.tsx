@@ -14,6 +14,8 @@ import {
 } from "react-icons/ri";
 import withToggle, { withToggleHOCProps } from "../hoc/TogglerHoc";
 import Image from "next/image";
+import { IconMenuItem } from "./IconMenuItem";
+import { youtubeMenuRoute } from "@realworld/constants/youtube/youtube";
 const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
   const inputRef = useRef(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -114,30 +116,9 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
                 </div>
               </div>
             </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <AiOutlineUser size={30} />
-              </ListItemIcon>
-              Your Channel
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <AiOutlineSetting size={30} />
-              </ListItemIcon>
-              Settings
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <MdOutlineHelpOutline size={30} />
-              </ListItemIcon>
-              Help
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <MdOutlineLogout size={30} />
-              </ListItemIcon>
-              Sign Out
-            </MenuItem>
+            {youtubeMenuRoute.map((menu, index) => (
+              <IconMenuItem {...menu} key={index} />
+            ))}
           </Menu>
         </div>
       </div>

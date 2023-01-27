@@ -1,21 +1,10 @@
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Chip,
-  Divider,
-  Menu,
-} from "@mui/material";
+import { Chip, Divider } from "@mui/material";
 import { IconMenuItem } from "@realworld/components/youtube/IconMenuItem";
 import { VideoCard } from "@realworld/components/youtube/VideoCard";
 import YoutubeHeader from "@realworld/components/youtube/YoutubeHeader";
-import {
-  youtubeMenuRoute,
-  youtubeSibebarRoute,
-} from "@realworld/constants/youtube/youtube";
-import Image from "next/image";
+import { youtubeSibebarRoute } from "@realworld/constants/youtube/youtube";
+import { recommendedDB } from "@realworld/data/dummySearch";
 import { useState } from "react";
-import { FiMoreVertical } from "react-icons/fi";
 
 const Youtube = () => {
   const [activeChip, setactiveChip] = useState("All");
@@ -31,7 +20,7 @@ const Youtube = () => {
   return (
     <div className="youtube">
       <YoutubeHeader />
-      <div className="flex main-layout h-[94vh] gap-2">
+      <div className="flex main-layout h-[94vh] gap-2 overflow-hidden">
         <div className="sidemenu min-w-[15%] overflow-y-scroll overflow-x-hidden">
           {youtubeSibebarRoute.map((menu, index) => (
             <IconMenuItem {...menu} key={index} />
@@ -93,10 +82,9 @@ const Youtube = () => {
             ))}
           </div>
 
-          <div className="video-gallery grid grid-cols-3 gap-5">
-            {Array.from({ length: 10 }, (v, k) => {
-              return <VideoCard key={k + 1} />;
-            })}
+          <div className="video-gallery grid grid-cols-3 gap-5 h-full overflow-x-auto">
+          
+            {recommendedDB?.map((videoItem,index)=><VideoCard video={videoItem} key={index}/>)}
           </div>
         </div>
       </div>

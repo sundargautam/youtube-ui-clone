@@ -1,7 +1,19 @@
 import { IconMenuItemProps } from "../../components/youtube/IconMenuItem";
 import { AiFillHome, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
-import { MdOutlineHelpOutline, MdOutlineLogout, MdSubscriptions } from "react-icons/md";
-import {HiOutlineLibrary} from "react-icons/hi"
+import {
+  MdOutlineHelpOutline,
+  MdOutlineLogout,
+  MdSubscriptions,
+} from "react-icons/md";
+import { HiOutlineLibrary } from "react-icons/hi";
+
+export interface VideoProps {
+  description: string;
+  sources: string[];
+  creator: string;
+  profile: string;
+  title: string;
+}
 
 export const youtubeMenuRoute: IconMenuItemProps[] = [
   {
@@ -43,5 +55,5 @@ export const youtubeSibebarRoute: IconMenuItemProps[] = [
     title: "Library",
     icon: <HiOutlineLibrary size={20} />,
     pathName: "/",
-  }
+  },
 ];

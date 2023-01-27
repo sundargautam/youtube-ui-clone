@@ -1,13 +1,17 @@
 import { Card, CardMedia, CardContent, Menu } from "@mui/material";
-import { youtubeMenuRoute } from "@realworld/constants/youtube/youtube";
+import {
+  VideoProps,
+  youtubeMenuRoute,
+} from "@realworld/constants/youtube/youtube";
 import Image from "next/image";
 import React, { useState } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import { IconMenuItem } from "./IconMenuItem";
-
-
-export const VideoCard = () => {
- const [toggle, setToggle] = useState(false)
+interface VideoCardProps {
+  video: VideoProps;
+}
+export const VideoCard = ({ video }: VideoCardProps) => {
+  const [toggle, setToggle] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -35,8 +39,7 @@ export const VideoCard = () => {
           e.target.pause();
         }}
         muted
-        src="https://media.istockphoto.com/id/1344343066/video/cozy-christmas-fireplace.mp4?s=mp4-640x640-is&k=20&c=8s3psKuBfbmnzL6B2VyV-Y8xasaO5FtI1z7vM4wEXKY="
-        title="green iguana"
+        src={video?.sources[0]}
         controls={toggle ? true : false}
       />
 
@@ -45,13 +48,13 @@ export const VideoCard = () => {
           <Image
             height={50}
             width={50}
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png"
+            src={video?.profile}
             alt="profile"
-            className="object-contain"
+            className="object-contain rounded-[50%]"
           />
           <div className="info flex flex-col flex-1">
-            <span>Pathaan Full Movie HD</span>
-            <span className="mt-1">T-Series</span>
+            <span>{video?.title}</span>
+            <span className="mt-1">{video?.creator}</span>
             <div className="view-wrapper flex gap-3">
               <span className="views">4.3M Views</span>
               <span className="time">5days ago</span>

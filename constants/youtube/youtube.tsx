@@ -13,6 +13,10 @@ export interface VideoProps {
   creator: string;
   profile: string;
   title: string;
+  views: number;
+  uploaded: string;
+  tags: string[];
+  id: number | string;
 }
 
 export const youtubeMenuRoute: IconMenuItemProps[] = [

@@ -3,7 +3,9 @@ import {
   VideoProps,
   youtubeMenuRoute,
 } from "@realworld/constants/youtube/youtube";
+import { nFormatter } from "@realworld/utils/nFormatter";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import { IconMenuItem } from "./IconMenuItem";
@@ -12,6 +14,7 @@ interface VideoCardProps {
 }
 export const VideoCard = ({ video }: VideoCardProps) => {
   const [toggle, setToggle] = useState(false);
+  const router = useRouter()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -27,6 +30,9 @@ export const VideoCard = ({ video }: VideoCardProps) => {
         setToggle(true);
       }}
       onMouseLeave={(e) => setToggle(false)}
+      onClick={(e)=>{
+        router.push(`/youtube/${video?.id}`)
+      }}
     >
       <CardMedia
         sx={{ height: 300 }}
@@ -56,8 +62,8 @@ export const VideoCard = ({ video }: VideoCardProps) => {
             <span>{video?.title}</span>
             <span className="mt-1">{video?.creator}</span>
             <div className="view-wrapper flex gap-3">
-              <span className="views">4.3M Views</span>
-              <span className="time">5days ago</span>
+              <span className="views">{nFormatter(video.views)} views</span>
+              <span className="time">{video?.uploaded}</span>
             </div>
           </div>
           {toggle && (

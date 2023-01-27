@@ -1,7 +1,7 @@
 import useOutsideAlerter from "@realworld/utils/outSideDetector";
 import { Menu, MenuItem } from "@mui/material";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { BsYoutube, BsSearch } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaMicrophone } from "react-icons/fa";
@@ -9,13 +9,17 @@ import { RiVideoAddLine, RiNotification2Line } from "react-icons/ri";
 import withToggle, { withToggleHOCProps } from "../hoc/TogglerHoc";
 import Image from "next/image";
 import { IconMenuItem } from "./IconMenuItem";
-import { VideoProps, youtubeMenuRoute } from "@realworld/constants/youtube/youtube";
+import {
+  VideoProps,
+  youtubeMenuRoute,
+} from "@realworld/constants/youtube/youtube";
 import Fuse from "fuse.js";
 import { searchDB } from "@realworld/data/dummySearch";
+import { useRouter } from "next/router";
 const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
-  const [searchresult, setSearchResult] = useState<
-  VideoProps[]
-  >([]);
+  const router = useRouter();
+  const [searchresult, setSearchResult] = useState<VideoProps[]>([]);
+  const [keyword, setKeyword] = useState("");
   const inputRef = useRef(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -25,12 +29,29 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    if (keyword) {
+      const fuse = new Fuse(searchDB, {
+        includeScore: true,
+        keys: ["title"],
+      });
+      const result = fuse.search(keyword).map((item) => item.item);
+      setSearchResult(result);
+    } else {
+      setSearchResult([]);
+    }
+  }, [keyword]);
+
   useOutsideAlerter({ ref: inputRef, setter: setToggle });
   return (
     <div className="youtubeHeader flex items-center justify-between py-2 md:px-6 xl:px-8">
       <div className="icon-wrapper flex gap-4 items-center">
         <RxHamburgerMenu size={30} />
-        <div className="logo flex items-center gap-1">
+        <div
+          className="logo flex items-center gap-1 hover:cursor-pointer"
+          onClick={(e) => router.push("/youtube")}
+        >
           <BsYoutube size={30} color="red" />
           <span className="font-bold text-xl text-gray-800">
             Youtube
@@ -53,28 +74,29 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
               type="text"
               placeholder="search"
               className="ml-2 focus:outline-none"
-              onChange={(e)=>{
-                const fuse = new Fuse(searchDB,{
-                  includeScore:true,
-                  keys:["title"]
-                })
-                const result = fuse.search(e.target.value).map((item)=>item.item)
-               setSearchResult(result)
-              }}
+              onChange={(e) => setKeyword(e.target.value)}
             />
           </div>
           <div className="search border-l flex  items-center p-4 bg-gray-50 hover:bg-gray-100">
             <BsSearch size={20} />
           </div>
         </div>
-      {searchresult.length>0 && (
+        {searchresult.length > 0 && (
           <div className="searchresult max-h-[30rem] w-[37rem] absolute top-10 z-50 bg-white rounded-md py-5 px-4 shadow-md border flex flex-col gap-3">
-         {searchresult.map((result,index)=>( <div key={index} className="result flex gap-3 items-center">
-            <BsSearch size={15} />
-            <span>{result?.title?.toLowerCase()}</span>
-          </div>))}
-        </div>
-      )}
+            {searchresult.map((result, index) => (
+              <div
+                key={index}
+                className="result flex gap-3 items-center"
+                onClick={(e) => {
+                  //router.push(`/youtube/${result?.id}`);
+                }}
+              >
+                <BsSearch size={15} />
+                <span>{result?.title?.toLowerCase()}</span>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="icon-wrapper">
           <FaMicrophone size={20} />
         </div>

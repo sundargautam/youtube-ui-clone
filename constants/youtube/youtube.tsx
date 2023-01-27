@@ -1,6 +1,7 @@
 import { IconMenuItemProps } from "../../components/youtube/IconMenuItem";
-import { AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
-import { MdOutlineHelpOutline, MdOutlineLogout } from "react-icons/md";
+import { AiFillHome, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
+import { MdOutlineHelpOutline, MdOutlineLogout, MdSubscriptions } from "react-icons/md";
+import {HiOutlineLibrary} from "react-icons/hi"
 
 export const youtubeMenuRoute: IconMenuItemProps[] = [
   {
@@ -24,4 +25,23 @@ export const youtubeMenuRoute: IconMenuItemProps[] = [
     icon: <MdOutlineLogout size={30} />,
     pathName: "/",
   },
+];
+
+export const youtubeSibebarRoute: IconMenuItemProps[] = [
+  {
+    title: "Home",
+    icon: <AiFillHome color="black" size={20} />,
+    pathName: "/",
+  },
+  {
+    title: "Subscription",
+    icon: <MdSubscriptions size={20} />,
+    pathName: "/",
+  },
+
+  {
+    title: "Library",
+    icon: <HiOutlineLibrary size={20} />,
+    pathName: "/",
+  }
 ];

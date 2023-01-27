@@ -1,17 +1,11 @@
 import useOutsideAlerter from "@realworld/utils/outSideDetector";
-import { Menu, MenuItem, Avatar, Divider, ListItemIcon } from "@mui/material";
+import { Menu, MenuItem } from "@mui/material";
 
 import React, { useRef, useState } from "react";
-import { AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
-import { MdOutlineHelpOutline, MdOutlineLogout } from "react-icons/md";
 import { BsYoutube, BsSearch } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaMicrophone } from "react-icons/fa";
-import {
-  RiVideoAddLine,
-  RiNotification2Line,
-  RiProfileLine,
-} from "react-icons/ri";
+import { RiVideoAddLine, RiNotification2Line } from "react-icons/ri";
 import withToggle, { withToggleHOCProps } from "../hoc/TogglerHoc";
 import Image from "next/image";
 import { IconMenuItem } from "./IconMenuItem";

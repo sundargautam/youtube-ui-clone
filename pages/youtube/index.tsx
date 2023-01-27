@@ -1,12 +1,7 @@
-import { Chip, Divider } from "@mui/material";
+import { Chip } from "@mui/material";
 import { ReactElement } from "react";
-import { IconMenuItem } from "@realworld/components/youtube/IconMenuItem";
 import { VideoCard } from "@realworld/components/youtube/VideoCard";
-import YoutubeHeader from "@realworld/components/youtube/YoutubeHeader";
-import {
-  VideoProps,
-  youtubeSibebarRoute,
-} from "@realworld/constants/youtube/youtube";
+import { VideoProps } from "@realworld/constants/youtube/youtube";
 import { recommendedDB, searchDB, tags } from "@realworld/data/dummySearch";
 import { useEffect, useState } from "react";
 import Fuse from "fuse.js";

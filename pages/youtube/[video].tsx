@@ -1,8 +1,10 @@
-import { Card, CardMedia } from "@mui/material";
+import { Button, Card, CardMedia } from "@mui/material";
 import YoutubeHeader from "@realworld/components/youtube/YoutubeHeader";
 import { VideoProps } from "@realworld/constants/youtube/youtube";
 import { searchDB } from "@realworld/data/dummySearch";
-import { YoutubePrimaryLayout } from "@realworld/layouts/youtube/YoutubePrimaryLayout";
+import { AiFillLike, AiOutlineLike, AiOutlineDownload } from "react-icons/ai";
+import { BiDislike } from "react-icons/bi";
+import { RiShareForwardLine } from "react-icons/ri";
 import Fuse from "fuse.js";
 import Image from "next/image";
 
@@ -14,7 +16,7 @@ const VideoPage: NextPageWithLayout = () => {
   const {
     query: { video },
   } = useRouter();
-
+  const [like, setLike] = useState(false);
   const [videoData, setVideoData] = useState<VideoProps>();
   useEffect(() => {
     if (video) {
@@ -36,12 +38,11 @@ const VideoPage: NextPageWithLayout = () => {
             src={videoData?.sources[0]}
             controls={true}
             autoPlay
-            className="h-full"
           />
-          <div className="title flex flex-col">
-            <span className="text-2xl">{videoData?.title}</span>
-            <div className="channel-wrapper mt-2">
-              <div className="channel flex gap-2">
+          <div className="title flex flex-col mt-2">
+            <span className="text-2xl font-bold">{videoData?.title}</span>
+            <div className="channel-wrapper mt-2 flex justify-between">
+              <div className="channel flex gap-3 items-center">
                 {videoData?.profile && (
                   <Image
                     width={50}
@@ -51,13 +52,42 @@ const VideoPage: NextPageWithLayout = () => {
                   />
                 )}
                 <div className="details flex flex-col">
-                    <span>{videoData?.creator}</span>
-                    <span className="subscriber">2.3M</span>
+                  <span className="font-bold">{videoData?.creator}</span>
+                  <span className="subscriber">1M Subscribers</span>
                 </div>
+                <Button
+                  style={{
+                    backgroundColor: "black",
+                  }}
+                  className="text-white rounded-xl h-8"
+                >
+                  Subscribe
+                </Button>
               </div>
-              <div className="stats"></div>
+              <div className="stats flex items-center flex-1 justify-end gap-10">
+                <div className="likes flex items-center">
+                  {like ? (
+                    <AiFillLike
+                      size={30}
+                      color="black"
+                      onClick={(e) => setLike(!like)}
+                    />
+                  ) : (
+                    <AiOutlineLike size={30} onClick={(e) => setLike(!like)} />
+                  )}{" "}
+                  <span>2.2K</span>
+                </div>
+                <BiDislike size={30} />
+                <div className="share flex gap-2">
+                  <RiShareForwardLine size={35} />
+                  <span>Share</span>
+                </div>
+                <AiOutlineDownload size={30} />
+              </div>
             </div>
           </div>
+
+          <div className="description border w-full min-h-[20rem] bg-[#F2F2F2] rounded-xl mt-2"></div>
         </div>
         <div className="recommended flex-[0.8]">
           <h2>Hello</h2>

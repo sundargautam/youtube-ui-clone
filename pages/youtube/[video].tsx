@@ -1,4 +1,4 @@
-import { Button, Card, CardMedia } from "@mui/material";
+import { Button, Card, CardMedia, makeStyles, Typography } from "@mui/material";
 import YoutubeHeader from "@realworld/components/youtube/YoutubeHeader";
 import { VideoProps } from "@realworld/constants/youtube/youtube";
 import { searchDB } from "@realworld/data/dummySearch";
@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 import { NextPageWithLayout } from "../_app";
+import { MemoShowMore } from "@realworld/components/youtube/ShowMore";
 
 const VideoPage: NextPageWithLayout = () => {
   const {
@@ -87,7 +88,14 @@ const VideoPage: NextPageWithLayout = () => {
             </div>
           </div>
 
-          <div className="description border w-full min-h-[20rem] bg-[#F2F2F2] rounded-xl mt-2"></div>
+          <div className="description  border w-full bg-[#F2F2F2] rounded-xl mt-2 p-2">
+            <MemoShowMore
+              text="<p>
+    <strong>3,20,000 views</strong>.
+    <span style='color: rgb(153, 51, 255);'>#rabilamichanne #rabilamichanne</span>
+</p> <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
+            />
+          </div>
         </div>
         <div className="recommended flex-[0.8]">
           <h2>Hello</h2>

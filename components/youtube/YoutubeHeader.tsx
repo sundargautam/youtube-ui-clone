@@ -45,7 +45,7 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
 
   useOutsideAlerter({ ref: inputRef, setter: setToggle });
   return (
-    <div className="youtubeHeader flex items-center justify-between py-2 md:px-6 xl:px-8">
+    <div className="youtubeHeader flex xss:flex-col items-start md:gap-2 xss:gap-3   md:flex-row  md:items-center justify-between py-2 md:px-6 xl:px-8 ">
       <div className="icon-wrapper flex gap-4 items-center">
         <RxHamburgerMenu size={30} />
         <div
@@ -62,7 +62,7 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
 
       <div
         ref={inputRef}
-        className="flex items-center md:gap-2 lg:gap-4 relative"
+        className="flex items-center  md:gap-2 lg:gap-4 relative"
       >
         <div className="left-wrapper search-wrapper border h-9 sm:min-w-[10rem] md:min-w-[20rem] lg:min-w-[30rem] xl:min-w-[40rem] flex rounded-xl py-4 overflow-hidden items-center">
           <div
@@ -102,7 +102,7 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
         </div>
       </div>
 
-      <div className="icon-wrapper-left flex gap-8 items-center">
+      <div className="icon-wrapper-left flex gap-8 items-center xss:hidden md:flex">
         <RiVideoAddLine size={30} className="hover:cursor-pointer" />
         <div className="notification relative hover:cursor-pointer">
           <RiNotification2Line size={30} />

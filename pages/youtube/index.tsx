@@ -9,19 +9,11 @@ import { NextPageWithLayout } from "../_app";
 import { YoutubePrimaryLayout } from "@realworld/layouts/youtube/YoutubePrimaryLayout";
 const Youtube: NextPageWithLayout = () => {
   const [activeChip, setactiveChip] = useState("");
-  const [toggle, setToggle] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+
   const [searchresult, setSearchResult] = useState<VideoProps[]>([
     ...recommendedDB,
   ]);
 
-  const handleClick = (event: any) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   useEffect(() => {
     if (activeChip) {
       const fuse = new Fuse(searchDB, {
@@ -36,10 +28,10 @@ const Youtube: NextPageWithLayout = () => {
   }, [activeChip]);
   return (
     <>
-      <div className="chip-container flex gap-4 overflow-x-auto scrollbar-thin py-2">
+      <div className="chip-container md:mb-1 xss:mb-2 xss:justify-center md:justify-start flex gap-4 overflow-x-auto scrollbar-thin py-2">
         <Chip
           label={"All"}
-          onClick={(e) => setactiveChip("")}
+          onClick={() => setactiveChip("")}
           className={
             !activeChip
               ? "hover:cursor-pointer text-white bg-black"
@@ -50,7 +42,7 @@ const Youtube: NextPageWithLayout = () => {
           <Chip
             label={tag}
             key={index}
-            onClick={(e) => setactiveChip(tag)}
+            onClick={() => setactiveChip(tag)}
             className={
               activeChip === tag
                 ? "hover:cursor-pointer text-white bg-black"
@@ -60,7 +52,7 @@ const Youtube: NextPageWithLayout = () => {
         ))}
       </div>
 
-      <div className="video-gallery grid grid-cols-3 gap-5 h-full overflow-x-auto">
+      <div className="video-gallery grid xss:grid-cols-1 md:grid-cols-3 gap-5 h-full overflow-x-auto">
         {searchresult?.map((videoItem, index) => (
           <VideoCard video={videoItem} key={index} />
         ))}

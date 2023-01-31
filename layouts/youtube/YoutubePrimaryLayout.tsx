@@ -13,7 +13,7 @@ export const YoutubePrimaryLayout = ({
     <div className="youtube">
       <YoutubeHeader />
       <div className="flex main-layout h-[94vh] gap-2 overflow-hidden">
-        <div className="sidemenu min-w-[15%] overflow-y-scroll overflow-x-hidden">
+        <div className="sidemenu xss:hidden md:block min-w-[15%] overflow-y-scroll overflow-x-hidden">
           {youtubeSibebarRoute.map((menu, index) => (
             <IconMenuItem {...menu} key={index} />
           ))}
@@ -47,7 +47,7 @@ export const YoutubePrimaryLayout = ({
           ))}
           <Divider />
         </div>
-        <div className="content min-w-[83%] gap-1">{children}</div>
+        <div className="content min-w-[83%] gap-1 xss:p-3 md:p-0">{children}</div>
       </div>
     </div>
   );

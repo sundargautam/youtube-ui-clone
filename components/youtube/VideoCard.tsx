@@ -14,7 +14,7 @@ interface VideoCardProps {
 }
 export const VideoCard = ({ video }: VideoCardProps) => {
   const [toggle, setToggle] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -25,17 +25,17 @@ export const VideoCard = ({ video }: VideoCardProps) => {
   };
   return (
     <Card
-      className="h-[26rem]"
+      className="xss:h-[22rem] md:h-[26rem]"
       onMouseOver={(e) => {
         setToggle(true);
       }}
       onMouseLeave={(e) => setToggle(false)}
-      onClick={(e)=>{
-        router.push(`/youtube/${video?.id}`)
+      onClick={(e) => {
+        router.push(`/youtube/${video?.id}`);
       }}
     >
       <CardMedia
-        sx={{ height: 300 }}
+        className="xss:h-[250px] md:h-[300px] object-cover"
         component="video"
         onMouseEnter={(e: any) => {
           e.target.play();

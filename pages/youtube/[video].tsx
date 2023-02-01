@@ -1,7 +1,7 @@
 import { Button, Card, CardMedia, makeStyles, Typography } from "@mui/material";
 import YoutubeHeader from "@realworld/components/youtube/YoutubeHeader";
 import { VideoProps } from "@realworld/constants/youtube/youtube";
-import { searchDB } from "@realworld/data/dummySearch";
+import { recommendedDB, searchDB } from "@realworld/data/dummySearch";
 import { AiFillLike, AiOutlineLike, AiOutlineDownload } from "react-icons/ai";
 import { BiDislike } from "react-icons/bi";
 import { RiShareForwardLine } from "react-icons/ri";
@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 import { NextPageWithLayout } from "../_app";
 import { MemoShowMore } from "@realworld/components/youtube/ShowMore";
+import { VideoCard } from "@realworld/components/youtube/VideoCard";
+import { RecommendedVideoCard } from "@realworld/components/youtube/RecommendeVideoCard";
 
 const VideoPage: NextPageWithLayout = () => {
   const {
@@ -31,8 +33,8 @@ const VideoPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <div className="wrapper flex px-7 py-2">
-        <div className="video-left flex-[2]">
+      <div className="wrapper flex xss:p-0 md:px-7 md:py-2 xss:flex-col md:flex-row xss:gap-2 md:gap-0">
+        <div className="video-left md:w-[65%] xl:w-[75%]">
           <CardMedia
             component="video"
             muted
@@ -42,7 +44,7 @@ const VideoPage: NextPageWithLayout = () => {
           />
           <div className="title flex flex-col mt-2">
             <span className="text-2xl font-bold">{videoData?.title}</span>
-            <div className="channel-wrapper mt-2 flex justify-between">
+            <div className="channel-wrapper mt-2 flex justify-between xss:flex-col xl:flex-row">
               <div className="channel flex gap-3 items-center">
                 {videoData?.profile && (
                   <Image
@@ -65,7 +67,7 @@ const VideoPage: NextPageWithLayout = () => {
                   Subscribe
                 </Button>
               </div>
-              <div className="stats flex items-center flex-1 justify-end gap-10">
+              <div className="stats md:mt-2 lg:mt-0 xss:hidden md:flex flex items-center flex-1 md:justify-evenly lg:justify-end gap-10">
                 <div className="likes flex items-center">
                   {like ? (
                     <AiFillLike
@@ -85,6 +87,23 @@ const VideoPage: NextPageWithLayout = () => {
                 </div>
                 <AiOutlineDownload size={30} />
               </div>
+
+              <div className="m-share flex xss:flex md:hidden items-end gap-6 my-1">
+                <div className="icon-wrapper flex items-center">
+                <AiFillLike
+                  size={30}
+                  color="black"
+                  onClick={(e) => setLike(!like)}
+                />
+                <span>2.2K</span>
+                </div>
+                <BiDislike size={30} />
+                <div className="icon-wrapper flex items-center">
+                <RiShareForwardLine size={35} />
+                <span>Share</span>
+                </div>
+                <AiOutlineDownload size={30} />
+              </div>
             </div>
           </div>
 
@@ -97,8 +116,10 @@ const VideoPage: NextPageWithLayout = () => {
             />
           </div>
         </div>
-        <div className="recommended flex-[0.8]">
-          <h2>Hello</h2>
+        <div className="recommended md:w-[35%] xl:w-[25%] flex flex-col gap-2">
+        {recommendedDB?.map((videoItem, index) => (
+          <RecommendedVideoCard video={videoItem} key={index} />
+        ))}
         </div>
       </div>
     </>

@@ -66,6 +66,9 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
          <div className="hamburger xss:flex md:hidden">
          <RxHamburgerMenu onClick={(e)=>setSideBar(!sidebar)} size={30} />
          </div>
+         <div className="hamburger xss:hidden md:flex">
+         <RxHamburgerMenu size={30} />
+         </div>
         <div
           className="logo flex items-center gap-1 hover:cursor-pointer"
           onClick={(e) => router.push("/youtube")}

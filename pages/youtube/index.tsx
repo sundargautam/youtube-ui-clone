@@ -52,7 +52,7 @@ const Youtube: NextPageWithLayout = () => {
         ))}
       </div>
 
-      <div className="video-gallery grid xss:grid-cols-1 md:grid-cols-3 gap-5 h-full overflow-x-auto">
+      <div className="video-gallery grid xss:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 h-full overflow-x-auto">
         {searchresult?.map((videoItem, index) => (
           <VideoCard video={videoItem} key={index} />
         ))}

@@ -1,5 +1,5 @@
 import useOutsideAlerter from "@realworld/utils/outSideDetector";
-import { Menu, MenuItem } from "@mui/material";
+import { Drawer, Menu, MenuItem, SwipeableDrawer } from "@mui/material";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { BsYoutube, BsSearch } from "react-icons/bs";
@@ -12,6 +12,7 @@ import { IconMenuItem } from "./IconMenuItem";
 import {
   VideoProps,
   youtubeMenuRoute,
+  youtubeSibebarRoute,
 } from "@realworld/constants/youtube/youtube";
 import Fuse from "fuse.js";
 import { searchDB } from "@realworld/data/dummySearch";
@@ -21,6 +22,7 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
   const [searchresult, setSearchResult] = useState<VideoProps[]>([]);
   const [keyword, setKeyword] = useState("");
   const inputRef = useRef(null);
+  const [sidebar,setSideBar] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -29,6 +31,7 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
 
   useEffect(() => {
     if (keyword) {
@@ -46,8 +49,23 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
   useOutsideAlerter({ ref: inputRef, setter: setToggle });
   return (
     <div className="youtubeHeader flex xss:flex-col items-start md:gap-2 xss:gap-3   md:flex-row  md:items-center justify-between py-2 md:px-6 xl:px-8 ">
+         <React.Fragment>
+          <Drawer
+            anchor={"left"}
+            open={sidebar}
+            onClose={()=>setSideBar(false)}
+          >
+         <div className="drawer-wrapper p-2">
+         {youtubeSibebarRoute.map((menu, index) => (
+            <IconMenuItem {...menu} key={index} />
+          ))}
+         </div>
+          </Drawer>  
+        </React.Fragment>
       <div className="icon-wrapper flex gap-4 items-center">
-        <RxHamburgerMenu size={30} />
+         <div className="hamburger xss:flex md:hidden">
+         <RxHamburgerMenu onClick={(e)=>setSideBar(!sidebar)} size={30} />
+         </div>
         <div
           className="logo flex items-center gap-1 hover:cursor-pointer"
           onClick={(e) => router.push("/youtube")}
@@ -82,7 +100,7 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
           </div>
         </div>
         {searchresult.length > 0 && (
-          <div className="searchresult max-h-[30rem] w-[37rem] absolute top-10 z-50 bg-white rounded-md py-5 px-4 shadow-md border flex flex-col gap-3">
+          <div className="searchresult max-h-[30rem] xss:w-full md:w-[30rem] xl:w-[37rem] absolute top-10 z-50 bg-white rounded-md py-5 px-4 shadow-md border flex flex-col gap-3">
             {searchresult.map((result, index) => (
               <div
                 key={index}

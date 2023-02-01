@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import { IconMenuItem } from "./IconMenuItem";
-interface VideoCardProps {
+export interface VideoCardProps {
   video: VideoProps;
 }
 export const VideoCard = ({ video }: VideoCardProps) => {

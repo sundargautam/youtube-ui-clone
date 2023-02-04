@@ -85,7 +85,7 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
         ref={inputRef}
         className="flex items-center  md:gap-2 lg:gap-4 relative"
       >
-        <div className="left-wrapper search-wrapper border h-9 sm:min-w-[10rem] md:min-w-[20rem] lg:min-w-[30rem] xl:min-w-[40rem] flex rounded-xl py-4 overflow-hidden items-center">
+        <div className="left-wrapper search-wrapper border h-9 sm:min-w-[10rem] md:min-w-[20rem] lg:min-w-[30rem] xl:min-w-[40rem] flex rounded-xl py-4 overflow-hidden items-center xss:ml-8 md:ml-0">
           <div
             className="input-wrapper flex items-center flex-1 mx-2"
             onClick={(e) => setToggle(true)}

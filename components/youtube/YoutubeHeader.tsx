@@ -71,7 +71,7 @@ const YoutubeHeader = ({ toggle, setToggle }: withToggleHOCProps) => {
          </div>
         <div
           className="logo flex items-center gap-1 hover:cursor-pointer"
-          onClick={(e) => router.push("/youtube")}
+          onClick={(e) => router.push("/")}
         >
           <BsYoutube size={30} color="red" />
           <span className="font-bold text-xl text-gray-800">
